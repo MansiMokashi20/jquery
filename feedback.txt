@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+  <div data-role="page">
+    <div data-role="header">
+      <h1>Feedback Form</h1>
+    </div>
+
+    <div data-role="content">
+      <form id="feedbackForm">
+        <div data-role="fieldcontain">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name">
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="comment">Comment:</label>
+          <textarea id="comment" name="comment"></textarea>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="toggle">Toggle:</label>
+          <select id="toggle" name="toggle" data-role="slider">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+          </select>
+        </div>
+
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+  <script>
+    $(document).on("pagecreate", function() {
+      $("#feedbackForm").submit(function(e) {
+        e.preventDefault(); // Prevent form submission
+
+        // Get form values
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var comment = $("#comment").val();
+        var toggle = $("#toggle").val();
+
+        // Create feedback object
+        var feedback = {
+          name: name,
+          email: email,
+          comment: comment,
+          toggle: toggle
+        };
+
+        // Save feedback to local storage
+        localStorage.setItem("feedback", JSON.stringify(feedback));
+
+        alert("Feedback submitted!");
+
+        // Clear form fields
+        $("#feedbackForm")[0].reset();
+      });
+    });
+  </script>
+</body>
+</html>
